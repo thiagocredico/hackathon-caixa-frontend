@@ -1,0 +1,76 @@
+
+<mat-card class="mat-elevation-z2 max-w-full sm:max-w-xl mx-auto mt-4 p-2 sm:p-6 flex flex-col items-center">
+	<mat-card-title class="text-center w-full text-base sm:text-xl font-bold">Simulação de Empréstimo</mat-card-title>
+	<mat-card-content class="w-full">
+		<div *ngIf="errorMsg()" class="text-center mb-2 sm:mb-4 w-full text-red-700 text-sm sm:text-base">
+			{{ errorMsg() }}
+		</div>
+		<form (ngSubmit)="simulate()" class="py-2 sm:py-4 flex flex-col items-center w-full" novalidate>
+			<mat-form-field appearance="fill" class="w-full mb-2 sm:mb-4 mx-auto">
+				<mat-label>Produto</mat-label>
+				<mat-select
+					[ngModel]="produtoId()"
+					(ngModelChange)="produtoId.set($any($event))"
+					name="produtoId"
+					required
+				>
+					<mat-option [value]="null">Selecione...</mat-option>
+					<mat-option *ngFor="let produto of products$()" [value]="produto.id">
+						{{ produto.nome }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<mat-form-field appearance="fill" class="w-full mb-2 sm:mb-4 mx-auto">
+				<mat-label>Valor do Empréstimo</mat-label>
+				<input
+					matInput
+					type="number"
+					[ngModel]="valor()"
+					(ngModelChange)="valor.set($any($event))"
+					name="valor"
+					required
+					min="1"
+				/>
+			</mat-form-field>
+			<mat-form-field appearance="fill" class="w-full mb-2 sm:mb-4 mx-auto">
+				<mat-label>Número de Meses</mat-label>
+				<input
+					matInput
+					type="number"
+					[ngModel]="meses()"
+					(ngModelChange)="meses.set($any($event))"
+					name="meses"
+					required
+					min="1"
+				/>
+			</mat-form-field>
+					<div class="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-2 sm:mt-4 w-full justify-center items-center">
+						<button
+							mat-raised-button
+							color="primary"
+							type="submit"
+							[disabled]="loading()"
+							class="w-full sm:w-auto px-4 sm:px-8 py-2 text-sm sm:text-base font-semibold rounded shadow hover:bg-blue-700 transition-all"
+						>
+							<ng-container *ngIf="loading(); else simularText">
+								<mat-progress-spinner
+									diameter="20"
+									mode="indeterminate"
+									class="align-middle"
+									[strokeWidth]="3"
+								></mat-progress-spinner>
+							</ng-container>
+							<ng-template #simularText>Simular</ng-template>
+						</button>
+						<button
+							mat-raised-button
+							type="button"
+							class="w-full sm:w-auto px-4 sm:px-8 py-2 text-sm sm:text-base font-semibold rounded shadow btn-laranja70 hover:bg-orange-500 transition-all"
+							(click)="irParaCadastroProduto()"
+						>
+							Cadastrar novo produto
+						</button>
+					</div>
+		</form>
+	</mat-card-content>
+</mat-card>
