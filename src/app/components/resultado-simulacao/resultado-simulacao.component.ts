@@ -9,20 +9,19 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 @Component({
-	selector: 'app-resultado-simulacao',
-	templateUrl: './resultado-simulacao.component.html',
-	styleUrls: ['./resultado-simulacao.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
-       imports: [
-	       CommonModule,
-	       MatCardModule,
-	       MatListModule,
-	       MatButtonModule,
-	       MatProgressSpinnerModule,
-	       MatTableModule,
-	       MatIconModule,
-       ],
+    selector: 'app-resultado-simulacao',
+    templateUrl: './resultado-simulacao.component.html',
+    styleUrls: ['./resultado-simulacao.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatListModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        MatTableModule,
+        MatIconModule,
+    ]
 })
 export class ResultadoSimulacaoComponent {
 	result$ = this.simulationService.result$;

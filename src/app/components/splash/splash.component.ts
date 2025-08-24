@@ -3,11 +3,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-splash',
-  templateUrl: './splash.component.html',
-  styleUrls: ['./splash.component.scss'],
-  standalone: true,
-  imports: [MatProgressSpinnerModule],
+    selector: 'app-splash',
+    templateUrl: './splash.component.html',
+    styleUrls: ['./splash.component.scss'],
+    imports: [MatProgressSpinnerModule]
 })
 export class SplashComponent implements OnInit {
   constructor(private router: Router) {}

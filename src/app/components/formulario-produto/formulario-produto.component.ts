@@ -11,22 +11,21 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
-	selector: 'app-formulario-produto',
-	templateUrl: './formulario-produto.component.html',
-	styleUrls: ['./formulario-produto.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
-		imports: [
-			CommonModule,
-			FormsModule,
-			ReactiveFormsModule,
-			MatFormFieldModule,
-			MatInputModule,
-			MatButtonModule,
-			MatCardModule,
-			MatProgressSpinnerModule,
-			MatSelectModule,
-		],
+    selector: 'app-formulario-produto',
+    templateUrl: './formulario-produto.component.html',
+    styleUrls: ['./formulario-produto.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCardModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+    ]
 })
 
 export class FormularioProdutoComponent {

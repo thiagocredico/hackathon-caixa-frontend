@@ -11,21 +11,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
 @Component({
-	selector: 'app-simulacao-emprestimo',
-	templateUrl: './simulacao-emprestimo.component.html',
-	styleUrls: ['./simulacao-emprestimo.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
-	imports: [
-		CommonModule,
-		FormsModule,
-		MatCardModule,
-		MatFormFieldModule,
-		MatInputModule,
-		MatSelectModule,
-		MatButtonModule,
-		MatProgressSpinnerModule,
-	],
+    selector: 'app-simulacao-emprestimo',
+    templateUrl: './simulacao-emprestimo.component.html',
+    styleUrls: ['./simulacao-emprestimo.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
+    ]
 })
 export class SimulacaoEmprestimoComponent {
 	valor = signal<number>(0);

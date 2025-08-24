@@ -6,17 +6,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
-	selector: 'app-lista-produto',
-	templateUrl: './lista-produto.component.html',
-	styleUrls: ['./lista-produto.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
-	imports: [
-		CommonModule,
-		MatCardModule,
-		MatListModule,
-		MatProgressSpinnerModule,
-	],
+    selector: 'app-lista-produto',
+    templateUrl: './lista-produto.component.html',
+    styleUrls: ['./lista-produto.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatListModule,
+        MatProgressSpinnerModule,
+    ]
 })
 export class ListaProdutoComponent {
 	products$ = this.productService.products$;

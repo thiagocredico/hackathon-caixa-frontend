@@ -10,21 +10,20 @@ import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
-  standalone: true,
-  imports: [
-    RouterLink,
-    RouterLinkActive,
-    CommonModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
-    MatIconModule,
-  MatButtonModule,
-  RouterOutlet,
-  ],
+    selector: 'app-root',
+    templateUrl: 'app.component.html',
+    styleUrls: ['app.component.scss'],
+    imports: [
+        RouterLink,
+        RouterLinkActive,
+        CommonModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatListModule,
+        MatIconModule,
+        MatButtonModule,
+        RouterOutlet,
+    ]
 })
 export class AppComponent {
   public appPages = [
