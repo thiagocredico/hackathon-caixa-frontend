@@ -2,22 +2,23 @@
 <mat-sidenav-container class="h-screen">
   <mat-sidenav #drawer mode="over" [opened]="false" class="w-[200px] sm:w-[260px]">
     <div class="flex flex-col items-center text-center py-4 sm:py-6 pb-2">
-  <img class="self-auto max-w-[120px] sm:max-w-[180px] cursor-pointer" src="assets/icon/CAIXA_chapada_positiva.svg" alt="Logo Caixa" (click)="onLogoClick(drawer)" />
+      <img class="self-auto max-w-[120px] sm:max-w-[180px] cursor-pointer" src="assets/icon/CAIXA_chapada_positiva.svg" alt="Logo Caixa" (click)="onLogoClick(drawer)" />
       <div class="font-bold text-sm sm:text-[1.1rem] mt-2">Simulador de Empréstimos</div>
     </div>
     <mat-nav-list>
-      <a
-        mat-list-item
-        *ngFor="let p of appPages"
-        [routerLink]="[p.url]"
-        routerLinkActive="selected"
-        [attr.aria-label]="'Ir para ' + p.title"
-        [ngClass]="{ 'menu-item-selected': p.url === router.url }"
-        (click)="drawer.close()"
-      >
-        <mat-icon matListIcon class="text-base sm:text-lg">{{ p.icon }}</mat-icon>
-        <span class="text-xs sm:text-base">{{ p.title }}</span>
-      </a>
+      @for (p of appPages; track p) {
+        <a
+          mat-list-item
+          [routerLink]="[p.url]"
+          routerLinkActive="selected"
+          [attr.aria-label]="'Ir para ' + p.title"
+          [ngClass]="{ 'menu-item-selected': p.url === router.url }"
+          (click)="drawer.close()"
+          >
+          <mat-icon matListIcon class="text-base sm:text-lg">{{ p.icon }}</mat-icon>
+          <span class="text-xs sm:text-base">{{ p.title }}</span>
+        </a>
+      }
     </mat-nav-list>
   </mat-sidenav>
 

@@ -2,84 +2,93 @@
 
 
 <mat-card class="mat-elevation-z4 max-w-full sm:max-w-2xl mx-auto mt-4 p-2 sm:p-6 bg-gradient-to-br from-blue-50 to-white shadow-lg rounded-xl">
-	<mat-card-content class="w-full flex flex-col items-center">
-		<div *ngIf="loading" class="flex flex-col items-center justify-center my-4 sm:my-6 w-full">
-			<mat-progress-spinner diameter="32" mode="indeterminate" color="primary"></mat-progress-spinner>
-			<span class="mt-2 text-blue-700 font-medium text-sm sm:text-base">Carregando...</span>
-		</div>
-		<div *ngIf="errorMsg" class="text-center mb-2 sm:mb-4 w-full text-red-600 text-sm sm:text-base font-semibold flex items-center justify-center">
-			<mat-icon color="warn" class="mr-2 text-sm sm:text-base">error</mat-icon>
-			<span class="text-sm sm:text-base">{{ errorMsg }}</span>
-		</div>
-		<div *ngIf="!loading && !errorMsg && resultado" class="w-full flex flex-col items-center">
-			<mat-card class="w-full bg-white/80 rounded-lg shadow mb-4">
-				<mat-card-title class="text-center w-full text-base sm:text-xl font-semibold text-blue-700 mb-1 sm:mb-2">Detalhes da Simulação</mat-card-title>
-				<mat-card-content class="w-full flex flex-col items-center">
-					<mat-list class="w-full flex flex-col items-center text-center p-2 sm:p-4">
-						<mat-list-item class="w-full flex flex-col items-center text-center mb-1 sm:mb-2">
-							<span class="font-semibold text-blue-800 text-sm sm:text-base">
-								{{ resultado.produto.sistema === 'SAC' ? 'Primeira parcela:' : 'Parcela mensal:' }}
-							</span>
-							<span class="text-sm sm:text-base">{{ resultado.parcelaMensal | currency:'BRL' }}</span>
-						</mat-list-item>
-						<mat-list-item class="w-full flex flex-col items-center text-center mb-1 sm:mb-2">
-							<span class="font-semibold text-blue-800 text-sm sm:text-base">Valor total com juros:</span>
-							<span class="text-sm sm:text-base">{{ resultado.valorTotalComJuros | currency:'BRL' }}</span>
-						</mat-list-item>
-						<mat-list-item class="w-full flex flex-col items-center text-center mb-1 sm:mb-2">
-							<span class="font-semibold text-blue-800 text-sm sm:text-base">Taxa efetiva mensal:</span>
-							<span class="text-sm sm:text-base">{{ resultado.taxaEfetivaMensal | number:'1.2-2' }}%</span>
-						</mat-list-item>
-						<mat-list-item class="w-full flex flex-col items-center text-center mb-1 sm:mb-2">
-							<span class="font-semibold text-blue-800 text-sm sm:text-base">Prazo:</span>
-							<span class="text-sm sm:text-base">{{ resultado.memoriaCalculo.length }} meses</span>
-						</mat-list-item>
-						<mat-list-item class="w-full flex flex-col items-center text-center mb-1 sm:mb-2">
-							<span class="font-semibold text-blue-800 text-sm sm:text-base">Produto:</span>
-							<span class="text-sm sm:text-base">{{ resultado.produto.nome }}</span>
-						</mat-list-item>
-						<mat-list-item class="w-full flex flex-col items-center text-center mb-1 sm:mb-2" *ngIf="resultado.produto.sistema">
-							<span class="font-semibold text-blue-800 text-sm sm:text-base">Sistema:</span>
-							<span class="text-sm sm:text-base">{{ resultado.produto.sistema }}</span>
-						</mat-list-item>
-					</mat-list>
-				</mat-card-content>
-			</mat-card>
-			<mat-card class="w-full bg-white/90 rounded-lg shadow mb-4">
-				<mat-card-title class="text-center w-full text-base sm:text-xl font-semibold text-blue-700 mb-1 sm:mb-2">Detalhes das Parcelas</mat-card-title>
-				<mat-card-content class="w-full flex flex-col items-center">
-					<div *ngIf="resultado.memoriaCalculo.length" class="overflow-x-auto mt-2 sm:mt-4 flex justify-center w-full">
-						<mat-table [dataSource]="resultado.memoriaCalculo" class="mat-elevation-z2 min-w-[340px] sm:min-w-[420px] w-fit rounded-lg shadow bg-white/90 mx-auto border border-blue-100 text-xs sm:text-base">
-							<ng-container matColumnDef="mes">
-								<mat-header-cell *matHeaderCellDef class="text-center bg-blue-100 text-blue-900 font-bold text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">Mês</mat-header-cell>
-								<mat-cell *matCellDef="let m" class="text-center text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">{{ m.mes }}</mat-cell>
-							</ng-container>
-							<ng-container matColumnDef="parcela">
-								<mat-header-cell *matHeaderCellDef class="text-center bg-blue-100 text-blue-900 font-bold text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">Parcela</mat-header-cell>
-								<mat-cell *matCellDef="let m" class="text-center text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">{{ m.parcela !== undefined ? (m.parcela | currency:'BRL') : (resultado.parcelaMensal | currency:'BRL') }}</mat-cell>
-							</ng-container>
-							<ng-container matColumnDef="juros">
-								<mat-header-cell *matHeaderCellDef class="text-center bg-blue-100 text-blue-900 font-bold text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">Juros</mat-header-cell>
-								<mat-cell *matCellDef="let m" class="text-center text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">{{ m.juros | currency:'BRL' }}</mat-cell>
-							</ng-container>
-							<ng-container matColumnDef="amortizacao">
-								<mat-header-cell *matHeaderCellDef class="text-center bg-blue-100 text-blue-900 font-bold text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">Amortização</mat-header-cell>
-								<mat-cell *matCellDef="let m" class="text-center text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">{{ m.amortizacao | currency:'BRL' }}</mat-cell>
-							</ng-container>
-							<ng-container matColumnDef="saldo">
-								<mat-header-cell *matHeaderCellDef class="text-center bg-blue-100 text-blue-900 font-bold text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">Saldo</mat-header-cell>
-								<mat-cell *matCellDef="let m" class="text-center text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">{{ m.saldo | currency:'BRL' }}</mat-cell>
-							</ng-container>
-
-							<mat-header-row *matHeaderRowDef="['mes', 'parcela', 'juros', 'amortizacao', 'saldo']" class="text-xs sm:text-sm"></mat-header-row>
-							<mat-row *matRowDef="let row; columns: ['mes', 'parcela', 'juros', 'amortizacao', 'saldo'];" class="text-xs sm:text-sm"></mat-row>
-						</mat-table>
-					</div>
-				</mat-card-content>
-			</mat-card>
-		</div>
-		<div class="text-center my-4 sm:my-6 w-full flex justify-center">
-			<button mat-raised-button color="primary" (click)="voltar()" class="px-4 sm:px-8 py-2 text-sm sm:text-base font-semibold rounded shadow hover:bg-blue-700 transition-all">Nova Simulação</button>
-		</div>
-	</mat-card-content>
+  <mat-card-content class="w-full flex flex-col items-center">
+    @if (loading) {
+      <div class="flex flex-col items-center justify-center my-4 sm:my-6 w-full">
+        <mat-progress-spinner diameter="32" mode="indeterminate" color="primary"></mat-progress-spinner>
+        <span class="mt-2 text-blue-700 font-medium text-sm sm:text-base">Carregando...</span>
+      </div>
+    }
+    @if (errorMsg) {
+      <div class="text-center mb-2 sm:mb-4 w-full text-red-600 text-sm sm:text-base font-semibold flex items-center justify-center">
+        <mat-icon color="warn" class="mr-2 text-sm sm:text-base">error</mat-icon>
+        <span class="text-sm sm:text-base">{{ errorMsg }}</span>
+      </div>
+    }
+    @if (!loading && !errorMsg && resultado) {
+      <div class="w-full flex flex-col items-center">
+        <mat-card class="w-full bg-white/80 rounded-lg shadow mb-4">
+          <mat-card-title class="text-center w-full text-base sm:text-xl font-semibold text-blue-700 mb-1 sm:mb-2">Detalhes da Simulação</mat-card-title>
+          <mat-card-content class="w-full flex flex-col items-center">
+            <mat-list class="w-full flex flex-col items-center text-center p-2 sm:p-4">
+              <mat-list-item class="w-full flex flex-col items-center text-center mb-1 sm:mb-2">
+                <span class="font-semibold text-blue-800 text-sm sm:text-base">
+                  {{ resultado.produto.sistema === 'SAC' ? 'Primeira parcela:' : 'Parcela mensal:' }}
+                </span>
+                <span class="text-sm sm:text-base">{{ resultado.parcelaMensal | currency:'BRL' }}</span>
+              </mat-list-item>
+              <mat-list-item class="w-full flex flex-col items-center text-center mb-1 sm:mb-2">
+                <span class="font-semibold text-blue-800 text-sm sm:text-base">Valor total com juros:</span>
+                <span class="text-sm sm:text-base">{{ resultado.valorTotalComJuros | currency:'BRL' }}</span>
+              </mat-list-item>
+              <mat-list-item class="w-full flex flex-col items-center text-center mb-1 sm:mb-2">
+                <span class="font-semibold text-blue-800 text-sm sm:text-base">Taxa efetiva mensal:</span>
+                <span class="text-sm sm:text-base">{{ resultado.taxaEfetivaMensal | number:'1.2-2' }}%</span>
+              </mat-list-item>
+              <mat-list-item class="w-full flex flex-col items-center text-center mb-1 sm:mb-2">
+                <span class="font-semibold text-blue-800 text-sm sm:text-base">Prazo:</span>
+                <span class="text-sm sm:text-base">{{ resultado.memoriaCalculo.length }} meses</span>
+              </mat-list-item>
+              <mat-list-item class="w-full flex flex-col items-center text-center mb-1 sm:mb-2">
+                <span class="font-semibold text-blue-800 text-sm sm:text-base">Produto:</span>
+                <span class="text-sm sm:text-base">{{ resultado.produto.nome }}</span>
+              </mat-list-item>
+              @if (resultado.produto.sistema) {
+                <mat-list-item class="w-full flex flex-col items-center text-center mb-1 sm:mb-2">
+                  <span class="font-semibold text-blue-800 text-sm sm:text-base">Sistema:</span>
+                  <span class="text-sm sm:text-base">{{ resultado.produto.sistema }}</span>
+                </mat-list-item>
+              }
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="w-full bg-white/90 rounded-lg shadow mb-4">
+          <mat-card-title class="text-center w-full text-base sm:text-xl font-semibold text-blue-700 mb-1 sm:mb-2">Detalhes das Parcelas</mat-card-title>
+          <mat-card-content class="w-full flex flex-col items-center">
+            @if (resultado.memoriaCalculo.length) {
+              <div class="overflow-x-auto mt-2 sm:mt-4 flex justify-center w-full">
+                <mat-table [dataSource]="resultado.memoriaCalculo" class="mat-elevation-z2 min-w-[340px] sm:min-w-[420px] w-fit rounded-lg shadow bg-white/90 mx-auto border border-blue-100 text-xs sm:text-base">
+                  <ng-container matColumnDef="mes">
+                    <mat-header-cell *matHeaderCellDef class="text-center bg-blue-100 text-blue-900 font-bold text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">Mês</mat-header-cell>
+                    <mat-cell *matCellDef="let m" class="text-center text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">{{ m.mes }}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="parcela">
+                    <mat-header-cell *matHeaderCellDef class="text-center bg-blue-100 text-blue-900 font-bold text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">Parcela</mat-header-cell>
+                    <mat-cell *matCellDef="let m" class="text-center text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">{{ m.parcela !== undefined ? (m.parcela | currency:'BRL') : (resultado.parcelaMensal | currency:'BRL') }}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="juros">
+                    <mat-header-cell *matHeaderCellDef class="text-center bg-blue-100 text-blue-900 font-bold text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">Juros</mat-header-cell>
+                    <mat-cell *matCellDef="let m" class="text-center text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">{{ m.juros | currency:'BRL' }}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="amortizacao">
+                    <mat-header-cell *matHeaderCellDef class="text-center bg-blue-100 text-blue-900 font-bold text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">Amortização</mat-header-cell>
+                    <mat-cell *matCellDef="let m" class="text-center text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">{{ m.amortizacao | currency:'BRL' }}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="saldo">
+                    <mat-header-cell *matHeaderCellDef class="text-center bg-blue-100 text-blue-900 font-bold text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">Saldo</mat-header-cell>
+                    <mat-cell *matCellDef="let m" class="text-center text-xs sm:text-sm px-1 sm:px-2 py-1 whitespace-nowrap">{{ m.saldo | currency:'BRL' }}</mat-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="['mes', 'parcela', 'juros', 'amortizacao', 'saldo']" class="text-xs sm:text-sm"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: ['mes', 'parcela', 'juros', 'amortizacao', 'saldo'];" class="text-xs sm:text-sm"></mat-row>
+                </mat-table>
+              </div>
+            }
+          </mat-card-content>
+        </mat-card>
+      </div>
+    }
+    <div class="text-center my-4 sm:my-6 w-full flex justify-center">
+      <button mat-raised-button color="primary" (click)="voltar()" class="px-4 sm:px-8 py-2 text-sm sm:text-base font-semibold rounded shadow hover:bg-blue-700 transition-all">Nova Simulação</button>
+    </div>
+  </mat-card-content>
 </mat-card>

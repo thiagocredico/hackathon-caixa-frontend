@@ -1,5 +1,5 @@
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { SimulationService, SimulationRequest } from '../../services/simulation.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService, Product } from '../../services/product.service';
@@ -16,15 +16,14 @@ import { FormsModule } from '@angular/forms';
     styleUrls: ['./simulacao-emprestimo.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
-        CommonModule,
-        FormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
-        MatButtonModule,
-        MatProgressSpinnerModule,
-    ]
+    FormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatProgressSpinnerModule
+]
 })
 export class SimulacaoEmprestimoComponent {
 	valor = signal<number>(0);
