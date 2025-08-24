@@ -33,6 +33,9 @@ export class SimulationService {
 
 
   simulate(request: SimulationRequest, produto: Product): Observable<SimulationResult | null> {
+    if (!request || !produto) {
+      return of(null);
+    }
     if (!environment.apiBaseUrl) {
       const taxaMensal = produto.taxaEfetivaMensal / 100;
       let parcela = 0;
