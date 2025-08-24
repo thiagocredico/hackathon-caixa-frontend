@@ -34,12 +34,12 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const app = fixture.nativeElement;
-  const menuLinks = app.querySelectorAll('a[mat-list-item]');
-  expect(menuLinks.length).toEqual(4);
-  expect(menuLinks[0].getAttribute('ng-reflect-router-link')).toEqual('/produtos');
-  expect(menuLinks[1].getAttribute('ng-reflect-router-link')).toEqual('/novo-produto');
-  expect(menuLinks[2].getAttribute('ng-reflect-router-link')).toEqual('/simulacao');
-  expect(menuLinks[3].getAttribute('ng-reflect-router-link')).toEqual('/resultado');
+    const menuLinks = app.querySelectorAll('a[mat-list-item]');
+    expect(menuLinks.length).toEqual(4);
+    expect(menuLinks[0].getAttribute('href')).toContain('/produtos');
+    expect(menuLinks[1].getAttribute('href')).toContain('/novo-produto');
+    expect(menuLinks[2].getAttribute('href')).toContain('/simulacao');
+    expect(menuLinks[3].getAttribute('href')).toContain('/resultado');
   });
   it('should navigate to root and close drawer on logo click', () => {
     const fixture = TestBed.createComponent(AppComponent);
