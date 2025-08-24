@@ -1,10 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { SimulationService } from './simulation.service';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { Product } from './product.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('SimulationService', () => {
   let service: SimulationService;
@@ -18,9 +16,9 @@ describe('SimulationService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [SimulationService],
-    });
+    imports: [],
+    providers: [SimulationService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     service = TestBed.inject(SimulationService);
     httpMock = TestBed.inject(HttpTestingController);
   });
