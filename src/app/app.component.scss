@@ -1,0 +1,25 @@
+/* Drawer slide-in animation: override material defaults to create a smooth left->right entrance */
+.mat-sidenav.mat-sidenav-opened {
+	transform: translateX(0) !important;
+	transition: transform 350ms cubic-bezier(.2,.8,.2,1) !important;
+}
+
+/* When closed, move it fully to the left */
+.mat-sidenav {
+	transform: translateX(-100%);
+	transition: transform 350ms cubic-bezier(.2,.8,.2,1);
+}
+
+/* Backdrop fade */
+.cdk-overlay-backdrop {
+	transition: opacity 300ms ease;
+}
+.cdk-overlay-backdrop.cdk-overlay-dark-backdrop {
+	opacity: 0.6;
+}
+
+/* Small visual tweaks */
+.menu-item-selected {
+	background-color: rgba(14,165,233,0.06) !important; /* sky-100 */
+}
+

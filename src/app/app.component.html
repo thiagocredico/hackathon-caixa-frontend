@@ -1,30 +1,12 @@
 
 <mat-sidenav-container class="h-screen">
-  <mat-sidenav #drawer mode="over" [opened]="false" class="w-[200px] sm:w-[260px]">
-    <div class="flex flex-col items-center text-center py-4 sm:py-6 pb-2">
-      <img class="self-auto max-w-[120px] sm:max-w-[180px] cursor-pointer" src="assets/icon/CAIXA_chapada_positiva.svg" alt="Logo Caixa" (click)="onLogoClick(drawer)" />
-      <div class="font-bold text-sm sm:text-[1.1rem] mt-2">Simulador de Empréstimos</div>
-    </div>
-    <mat-nav-list>
-      @for (p of appPages; track p) {
-        <a
-          mat-list-item
-          [routerLink]="[p.url]"
-          routerLinkActive="selected"
-          [attr.aria-label]="'Ir para ' + p.title"
-          [ngClass]="{ 'menu-item-selected': p.url === router.url }"
-          (click)="drawer.close()"
-          >
-          <mat-icon matListIcon class="text-base sm:text-lg">{{ p.icon }}</mat-icon>
-          <span class="text-xs sm:text-base">{{ p.title }}</span>
-        </a>
-      }
-    </mat-nav-list>
+  <mat-sidenav #drawer mode="over" [opened]="false" class="min-w-72 sm:w-[260px]">
+    <app-drawer-content [pages]="appPages" (close)="close()"></app-drawer-content>
   </mat-sidenav>
 
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="sticky top-0 z-20 min-h-[48px] sm:min-h-[64px] px-2 sm:px-6">
-      <button mat-icon-button (click)="drawer.toggle()" class="mr-2">
+  <button mat-icon-button (click)="toggle()" class="mr-2">
         <mat-icon class="text-base sm:text-lg">menu</mat-icon>
       </button>
       <span class="text-base sm:text-lg">Simulador de Empréstimos</span>
