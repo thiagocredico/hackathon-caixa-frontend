@@ -5,7 +5,7 @@
 
 <mat-nav-list class="px-2 py-3">
   <ng-container *ngFor="let p of pages">
-    <a
+      <a
       mat-list-item
       [routerLink]="p.url"
       routerLinkActive="bg-sky-50 text-sky-700"
@@ -14,8 +14,8 @@
       (click)="onLinkClick()"
       class="rounded-lg hover:bg-sky-50 transition-colors"
     >
-      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sky-100 text-sky-700 mr-3">
-        <mat-icon class="text-lg">{{ p.icon }}</mat-icon>
+      <span class="inline-flex items-center justify-center w-10 h-10 mr-3">
+        <mat-icon class="text-lg no-icon-bg">{{ p.icon }}</mat-icon>
       </span>
       <span class="flex-1 text-sm sm:text-base">{{ p.title }}</span>
     </a>

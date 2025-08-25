@@ -10,6 +10,7 @@
     <form (ngSubmit)="simulate()" class="py-2 sm:py-4 flex flex-col items-center w-full" novalidate>
       <mat-form-field appearance="fill" class="w-full mb-2 sm:mb-4 mx-auto">
         <mat-label>Produto</mat-label>
+        <mat-icon matPrefix class="icon-sky ">shopping_bag</mat-icon>
         <mat-select
           [ngModel]="produtoId()"
           (ngModelChange)="produtoId.set($any($event))"
@@ -23,9 +24,12 @@
             </mat-option>
           }
         </mat-select>
+        <mat-hint>Escolha o produto a ser simulado</mat-hint>
       </mat-form-field>
+
       <mat-form-field appearance="fill" class="w-full mb-2 sm:mb-4 mx-auto">
         <mat-label>Valor do Empréstimo</mat-label>
+        <mat-icon matPrefix class="icon-sky">attach_money</mat-icon>
         <input
           matInput
           type="number"
@@ -35,9 +39,12 @@
           required
           min="1"
           />
+        <mat-hint>Informe o valor desejado (R$)</mat-hint>
       </mat-form-field>
+
       <mat-form-field appearance="fill" class="w-full mb-2 sm:mb-4 mx-auto">
         <mat-label>Número de Meses</mat-label>
+        <mat-icon matPrefix class="icon-sky">calendar_month</mat-icon>
         <input
           matInput
           type="number"
@@ -47,14 +54,16 @@
           required
           min="1"
           />
+        <mat-hint>Duração em meses</mat-hint>
       </mat-form-field>
+
       <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-2 sm:mt-4 w-full justify-center items-center">
         <button
           mat-raised-button
           color="primary"
           type="submit"
           [disabled]="loading()"
-          class="w-full sm:w-auto px-4 sm:px-8 py-2 text-sm sm:text-base font-semibold rounded shadow hover:bg-blue-700 transition-all"
+          class="w-full sm:w-auto px-4 sm:px-8 py-2 text-sm sm:text-base font-semibold rounded shadow hover:bg-blue-700 transition-all app-btn"
           >
           @if (loading()) {
             <mat-progress-spinner
@@ -67,10 +76,11 @@
             Simular
           }
         </button>
+
         <button
           mat-raised-button
           type="button"
-          class="w-full sm:w-auto px-4 sm:px-8 py-2 text-sm sm:text-base font-semibold rounded shadow btn-laranja70 hover:bg-orange-500 transition-all"
+          class="w-full sm:w-auto px-4 sm:px-8 py-2 text-sm sm:text-base font-semibold rounded shadow btn-laranja70 hover:bg-orange-500 transition-all app-btn"
           (click)="irParaCadastroProduto()"
           >
           Cadastrar novo produto

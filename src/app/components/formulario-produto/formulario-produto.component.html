@@ -1,51 +1,67 @@
 
 
-<mat-card class="mat-elevation-z2 max-w-full sm:max-w-md mx-auto mt-4 p-2 sm:p-6 flex flex-col items-center">
-  <mat-card-title class="text-base sm:text-xl font-bold">{{ titulo }}</mat-card-title>
-  <mat-card-content class="w-full">
-    @if (errorMsg()) {
-      <div class="text-center mb-2 sm:mb-3 w-full text-red-700 text-xs sm:text-base">
-        {{ errorMsg() }}
-      </div>
-    }
-    @if (successMsg()) {
-      <div class="text-center mb-2 sm:mb-3 w-full text-green-700 text-xs sm:text-base">
-        {{ successMsg() }}
-      </div>
-    }
-    <form (ngSubmit)="submit()" novalidate autocomplete="off">
-      <mat-form-field appearance="outline" class="w-full mb-2 sm:mb-4 mx-auto">
-        <mat-label>Nome do Produto</mat-label>
+<mat-card class="mat-elevation-z2 max-w-full sm:max-w-lg mx-auto mt-6 p-4 sm:p-6">
+  <mat-card-header class="pb-2 mb-4">
+    <mat-card-title class="text-lg sm:text-2xl font-bold">{{ titulo }}</mat-card-title>
+    <mat-card-subtitle class="text-sm text-gray-500">Cadastre produtos para simular empréstimos</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div *ngIf="errorMsg()" class="text-center mb-3 text-red-700">{{ errorMsg() }}</div>
+    <div *ngIf="successMsg()" class="text-center mb-3 text-green-700">{{ successMsg() }}</div>
+
+    <form (ngSubmit)="submit()" novalidate autocomplete="off" class="space-y-3">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Nome do produto</mat-label>
+        <mat-icon matPrefix>inventory_2</mat-icon>
         <input matInput type="text" [ngModel]="nome()" (ngModelChange)="nome.set($any($event))" name="nome" required />
+        <mat-hint>Ex.: Empréstimo Pessoal</mat-hint>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="w-full mb-2 sm:mb-4 mx-auto">
-        <mat-label>Taxa de Juros Anual (%)</mat-label>
-        <input matInput type="number" [ngModel]="taxaEfetivaAnual()" (ngModelChange)="taxaEfetivaAnual.set($any($event))" name="taxaEfetivaAnual" required min="0" step="0.01" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="w-full mb-2 sm:mb-4 mx-auto">
-        <mat-label>Sistema de Amortização</mat-label>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Taxa Anual (%)</mat-label>
+          <mat-icon matPrefix>percent</mat-icon>
+          <input matInput type="number" [ngModel]="taxaEfetivaAnual()" (ngModelChange)="taxaEfetivaAnual.set($any($event))" name="taxaEfetivaAnual" required min="0" step="0.01" />
+          <span matSuffix>%</span>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Prazo máximo (meses)</mat-label>
+          <mat-icon matPrefix>schedule</mat-icon>
+          <input matInput type="number" [ngModel]="prazoMaximo()" (ngModelChange)="prazoMaximo.set($any($event))" name="prazoMaximo" required min="1" />
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Sistema</mat-label>
+        <mat-icon matPrefix>swap_horiz</mat-icon>
         <mat-select [ngModel]="sistema()" (ngModelChange)="sistema.set($any($event))" name="sistema" required>
           <mat-option [value]="'PRICE'">Price (Parcelas Iguais)</mat-option>
           <mat-option [value]="'SAC'">SAC (Amortização Constante)</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="w-full mb-2 sm:mb-4 mx-auto">
-        <mat-label>Prazo Máximo (meses)</mat-label>
-        <input matInput type="number" [ngModel]="prazoMaximo()" (ngModelChange)="prazoMaximo.set($any($event))" name="prazoMaximo" required min="1" />
-      </mat-form-field>
-      <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-2 sm:mt-3">
-        <button mat-raised-button color="primary" type="submit" [disabled]="loading()" class="w-full sm:w-auto flex justify-center text-xs sm:text-base px-4 sm:px-6">
-          @if (loading()) {
-            <mat-progress-spinner diameter="20" mode="indeterminate" class="align-middle mr-2" strokeWidth="3"></mat-progress-spinner>
-          }
-          Cadastrar
+
+      <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-2 sm:mt-4 w-full justify-center items-center">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="loading()"
+          class="w-full sm:w-auto px-4 sm:px-8 py-2 text-sm sm:text-base font-semibold rounded shadow hover:bg-blue-700 transition-all app-btn"
+        >Salvar Produto
+          <ng-container *ngIf="loading(); else saveLabel">
+            <mat-progress-spinner diameter="20" mode="indeterminate" class="align-middle" [strokeWidth]="3"></mat-progress-spinner>
+          </ng-container>
+          <ng-template #saveLabel>Salvar</ng-template>
         </button>
+
         <button
           mat-raised-button
           type="button"
-          class="w-full sm:w-auto flex justify-center text-xs sm:text-base px-4 sm:px-6 btn-laranja70 hover:bg-orange-500 transition-all"
+          class="w-full sm:w-auto px-4 sm:px-8 py-2 text-sm sm:text-base font-semibold rounded shadow btn-laranja70 hover:bg-orange-500 transition-all app-btn"
           (click)="irParaSimulacao()"
-          >
+        >
           Simular Empréstimo
         </button>
       </div>

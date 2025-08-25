@@ -1,0 +1,25 @@
+/* Use the project's primary blue for the header */
+mat-toolbar { background: #005ca9; color: white; }
+
+/* Ensure the menu icon button is a fixed square and icon is perfectly centered */
+mat-toolbar button[mat-icon-button] {
+	width: 40px;
+	height: 40px;
+	padding: 0; /* remove default button padding */
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+mat-toolbar button[mat-icon-button] .mat-icon, mat-toolbar button[mat-icon-button] mat-icon {
+	margin: 0 !important;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* ensure drawer keeps shadow and sizing */
+mat-sidenav { box-shadow: 0 10px 30px rgba(2,6,23,0.06); }
+
+/* toolbar button spacing */
+button[mat-icon-button] { color: white; }

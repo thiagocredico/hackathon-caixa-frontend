@@ -1,23 +1,7 @@
 
-<mat-sidenav-container class="h-screen">
-  <mat-sidenav #drawer mode="over" [opened]="false" class="min-w-72 sm:w-[260px]">
-    <app-drawer-content [pages]="appPages" (close)="close()"></app-drawer-content>
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-    <mat-toolbar color="primary" class="sticky top-0 z-20 min-h-[48px] sm:min-h-[64px] px-2 sm:px-6">
-  <button mat-icon-button (click)="toggle()" class="mr-2">
-        <mat-icon class="text-base sm:text-lg">menu</mat-icon>
-      </button>
-      <span class="text-base sm:text-lg">Simulador de Empréstimos</span>
-    </mat-toolbar>
-
-    <div class="p-2 sm:p-6 min-h-[calc(100vh-48px)] sm:min-h-[calc(100vh-64px)] pb-16">
-      <router-outlet></router-outlet>
-    </div>
-    <footer class="fixed bottom-0 left-0 w-full bg-white/80 text-center py-2 text-xs sm:text-sm text-blue-900 shadow z-30">
-      Feito com <span class="text-blue-600">💙</span> por Thiago Banfi Credico 2025
-    </footer>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<app-header [appPages]="appPages">
+  <div class="p-2 sm:p-6 min-h-[calc(100vh-48px)] sm:min-h-[calc(100vh-64px)] pb-16">
+    <router-outlet></router-outlet>
+  </div>
+</app-header>
 

@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 @Component({
     selector: 'app-simulacao-emprestimo',
@@ -22,6 +23,7 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+	MatIconModule,
     MatProgressSpinnerModule
 ]
 })

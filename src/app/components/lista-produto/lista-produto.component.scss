@@ -1,0 +1,122 @@
+/* Product card styles */
+.product-card {
+
+	background: linear-gradient(180deg, #ffffff, #fbfdff);
+	border-radius: 12px;
+	box-shadow: 0 8px 26px rgba(2,6,23,0.04);
+	transition: transform 180ms ease, box-shadow 180ms ease;
+	display: flex !important;
+	flex-direction: column !important;
+	padding: 18px;
+	min-height: 160px;
+	overflow: visible; 
+	min-width: 260px;
+	box-sizing: border-box;
+}
+.product-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(2,6,23,0.07); }
+
+.product-card .w-12 { width: 56px; height: 56px; }
+.product-card .font-semibold { font-size: 1.05rem; word-break: break-word; overflow-wrap: break-word; }
+
+.product-meta { min-width: 0; max-width: 45%; min-width: 120px; }
+.product-meta .taxa-efetiva { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.product-meta .taxa-efetiva { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.product-meta .taxa-prazo { color: #6b7280; }
+
+.badge { background: #ffffffcc; border-radius: 8px; padding: 6px 10px; box-shadow: 0 3px 8px rgba(2,6,23,0.04); font-size: 0.85rem; }
+.badge-system { background: #e6f4ff; color: #075985; font-weight: 700; }
+
+.icon-sky { color: #0ea5e9 !important; font-size: 1.1rem; }
+
+.product-card mat-icon, .product-card .mat-icon {
+	color: #f59e0b !important;
+}
+
+.btn-laranja70 {
+	background-color: #f59e0b !important; 
+	color: #081c15 !important;
+	border-color: transparent !important;
+}
+.btn-laranja70:hover {
+	background-color: #d97706 !important; 
+}
+
+
+.card-footer { margin-top: auto; position: relative; z-index: 2; }
+
+button[mat-flat-button], button[mat-stroked-button] { box-shadow: none; min-height: 38px; }
+
+mat-card-actions.card-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 12px;
+	padding-bottom: 6px;
+}
+
+mat-card-actions.card-footer {
+	flex-wrap: wrap; 
+	gap: 8px;
+}
+
+mat-card-actions.card-footer > div:last-child {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	flex: 1 1 100%;
+	flex-direction: column;
+	align-items: stretch; 
+	justify-content: flex-start;
+}
+
+mat-card-actions.card-footer button[mat-flat-button],
+mat-card-actions.card-footer button[mat-stroked-button] {
+	box-sizing: border-box;
+	flex: 1 1 100%;
+	max-width: 100%;
+	width: 100%;
+	min-width: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+mat-card-actions.card-footer button[mat-flat-button] {
+	padding: 8px 14px;
+	font-weight: 600;
+}
+mat-card-actions.card-footer button[mat-stroked-button] {
+	padding: 6px 12px;
+	border-width: 1px;
+}
+
+@media (max-width: 640px) {
+	mat-card-actions.card-footer > div:last-child {
+		width: 100%;
+		flex-direction: column;
+	}
+	mat-card-actions.card-footer button[mat-flat-button], mat-card-actions.card-footer button[mat-stroked-button] {
+		max-width: 100%;
+		flex: 1 1 100%;
+	}
+}
+
+@media (min-width: 1024px) {
+	mat-card-actions.card-footer > div:last-child {
+		flex-direction: row;
+		flex: 1 1 100%;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	mat-card-actions.card-footer button[mat-flat-button], mat-card-actions.card-footer button[mat-stroked-button] {
+		flex: 0 0 calc(50% - 4px);
+		max-width: calc(50% - 4px);
+		min-width: 96px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.grid { gap: 1.25rem; }
+}
+

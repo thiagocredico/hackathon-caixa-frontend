@@ -1,6 +1,7 @@
 import { Component, computed } from '@angular/core';
 import { DecimalPipe, CommonModule } from '@angular/common';
 import { SimulationService } from '../../services/simulation.service';
+import { Router } from '@angular/router';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
@@ -33,7 +34,7 @@ export class ResultadoSimulacaoComponent {
 	errorMsg: string | null = null;
 	successMsg: string | null = null;
 
-	constructor(private simulationService: SimulationService) {}
+	constructor(private simulationService: SimulationService, private router: Router) {}
 
 	salvarResultado(): void {
 		this.errorMsg = null;
@@ -57,5 +58,9 @@ export class ResultadoSimulacaoComponent {
 
 	voltar(): void {
 		window.history.back();
+	}
+
+	irParaSimulacao(): void {
+		this.router.navigate(['/simulacao']);
 	}
 }

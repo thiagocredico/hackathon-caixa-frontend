@@ -5,6 +5,8 @@ import { ProductService } from '../../services/product.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
     selector: 'app-lista-produto',
     templateUrl: './lista-produto.component.html',
@@ -14,7 +16,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         CommonModule,
         MatCardModule,
         MatListModule,
-        MatProgressSpinnerModule,
+	MatProgressSpinnerModule,
+	MatIconModule,
+	MatButtonModule,
     ]
 })
 export class ListaProdutoComponent {
@@ -23,7 +27,7 @@ export class ListaProdutoComponent {
 	loading = false;
 	errorMsg: string | null = null;
 
-	constructor(private productService: ProductService, private router: Router) {
+		constructor(private productService: ProductService, public router: Router) {
 		this.loading = true;
 		this.productService.fetchProducts().subscribe({
 			next: (products) => {
@@ -41,7 +45,6 @@ export class ListaProdutoComponent {
 		this.router.navigate(['/simulacao'], { queryParams: { produtoId } });
 	}
 	calcularTaxaEfetivaAnual(mensal: number): number {
-		// mensal em porcentagem, ex: 2.5
 		const mensalDecimal = mensal / 100;
 		return (Math.pow(1 + mensalDecimal, 12) - 1) * 100;
 	}

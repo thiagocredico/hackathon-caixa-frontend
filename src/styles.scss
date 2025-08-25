@@ -14,3 +14,155 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Global icon color utility (use app orange) */
+.mat-icon, mat-icon {
+  color: #f59e0b !important; /* amber/orange */
+  background-color: #fff7ed; /* very light orange */
+  border-radius: 9999px;
+  box-sizing: border-box;
+  /* fixed circular container so icon is always centered */
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1; /* ensure text icons center vertically */
+  vertical-align: middle;
+  font-size: 18px; /* reasonable default for icon glyphs */
+}
+
+/* Ensure SVG icons scale and center inside the circle */
+.mat-icon svg, mat-icon svg { width: 60%; height: 60%; display: block; }
+
+/* Utility class for targeted icons (kept name for compatibility) */
+.icon-sky {
+  color: #f59e0b !important;
+  background-color: #fff7ed !important;
+  border-radius: 9999px !important;
+  box-sizing: border-box !important;
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  vertical-align: middle !important;
+  font-size: 18px !important;
+}
+
+/* Stronger overrides to ensure perfect centering across variants */
+.mat-icon, mat-icon, .icon-sky {
+  margin: 0 !important;
+  transform: none !important;
+  /* force glyph centering for font-based icons */
+  text-align: center !important;
+}
+
+.mat-icon svg, mat-icon svg {
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+/* Opt-out utility: prevents circle background when needed */
+.no-icon-bg { background: transparent !important; box-shadow: none !important; }
+
+/* Small utility and sibling selector to add consistent gap between icon and adjacent text */
+.icon-gap { margin-right: 8px !important; }
+.mat-icon + *, mat-icon + * { margin-left: 8px !important; }
+
+/* Input icons (mat-form-field prefix/suffix) — smaller, transparent, perfectly centered */
+.mat-form-field .mat-icon.mat-prefix,
+.mat-form-field .mat-icon.mat-suffix,
+.mat-form-field .mat-form-field-prefix .mat-icon,
+.mat-form-field .mat-form-field-suffix .mat-icon {
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  padding: 0 !important;
+  margin: 0 8px 0 0 !important; /* keep a small gap to the input */
+  background: transparent !important;
+  border-radius: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 18px !important;
+}
+
+.mat-form-field .mat-icon.mat-prefix svg, .mat-form-field .mat-icon.mat-suffix svg,
+.mat-form-field .mat-form-field-prefix .mat-icon svg, .mat-form-field .mat-form-field-suffix .mat-icon svg {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
+
+/* Stronger attribute-based rules for matPrefix/matSuffix icons to override global .mat-icon circle */
+mat-icon[matprefix], .mat-icon[matprefix] {
+  background: transparent !important;
+  box-shadow: none !important;
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  padding: 0 !important;
+  margin-right: 8px !important; /* gap between icon and input content */
+  border-radius: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+mat-icon[matsuffix], .mat-icon[matsuffix] {
+  background: transparent !important;
+  box-shadow: none !important;
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  padding: 0 !important;
+  margin-left: 8px !important; /* gap between suffix icon and input content */
+  border-radius: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* also target mat-form-field-infix nested icons */
+.mat-form-field .mat-form-field-infix mat-icon, .mat-form-field .mat-form-field-infix .mat-icon {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Global button normalization for the app */
+button, .mat-button, .mat-flat-button, .mat-stroked-button, .mat-raised-button, .mat-icon-button {
+  font-family: inherit;
+}
+
+/* Primary sizing for buttons used across the app */
+.app-btn {
+  min-height: 40px;
+  padding: 8px 16px; /* increased horizontal padding */
+  border-radius: 8px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure Material button variants inherit the app sizing */
+.mat-button .app-btn, .mat-flat-button.app-btn, .mat-stroked-button.app-btn, .mat-raised-button.app-btn {
+  height: auto;
+}
+
+/* Utility to make action groups align consistently */
+.action-group { display: inline-flex; gap: 8px; align-items: center; }
+
+/* Increase horizontal padding inside material form fields for more comfortable spacing */
+.mat-form-field .mat-form-field-infix {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+

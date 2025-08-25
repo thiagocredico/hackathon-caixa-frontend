@@ -13,27 +13,39 @@
     </div>
   }
   @if (!loading && !errorMsg && products$().length) {
-    <div
-      class="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-6"
-      >
+  <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2">
       @for (produto of products$(); track produto) {
-        <mat-card
-          class="mat-elevation-z1 flex flex-col justify-between h-full p-2 sm:p-4 cursor-pointer hover:shadow-lg transition-shadow duration-200 min-w-0"
+        <mat-card class="product-card p-3" role="button" tabindex="0"
           (click)="produto.id != null ? simularComProduto(produto.id) : null"
-          tabindex="0"
-          (keydown.enter)="produto.id != null ? simularComProduto(produto.id) : null"
-          >
-          <mat-card-header class="p-0 mb-1 sm:mb-2">
-            <mat-card-title class="font-bold text-sm sm:text-lg">{{ produto.nome }}</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="p-0">
-            <div class="text-xs sm:text-base mb-1">Taxa Efetiva Mensal: <span class="font-semibold">{{ produto.taxaEfetivaMensal }}%</span></div>
-            <div class="text-xs sm:text-base mb-1">Taxa Efetiva Anual: <span class="font-semibold">{{ calcularTaxaEfetivaAnual(produto.taxaEfetivaMensal) | number:'1.2-2' }}%</span></div>
-            <div class="text-xs sm:text-base">Prazo Máximo: <span class="font-semibold">{{ produto.prazoMaximo }} meses</span></div>
-            @if (produto.sistema) {
-              <div class="text-xs sm:text-base">Sistema: <span class="font-semibold">{{ produto.sistema }}</span></div>
-            }
-          </mat-card-content>
+          (keydown.enter)="produto.id != null ? simularComProduto(produto.id) : null">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-start gap-3">
+              <div class="w-12 h-12 rounded-lg bg-transparent flex items-center justify-center shadow-sm">
+                <mat-icon class="icon-sky text-xl">shopping_bag</mat-icon>
+              </div>
+              <div>
+                <div class="font-semibold text-sm sm:text-base">{{ produto.nome }}</div>
+                <div class="text-xs text-gray-500">{{ produto.sistema || '—' }}</div>
+              </div>
+            </div>
+            <div class="flex flex-col items-end gap-2 product-meta">
+              <div class="text-sm font-semibold text-blue-800 taxa-efetiva">{{ produto.taxaEfetivaMensal }}%</div>
+              <div class="text-xs text-gray-500 taxa-prazo">{{ produto.prazoMaximo }} meses</div>
+            </div>
+          </div>
+
+          <mat-card-actions class="card-footer mt-3 flex items-center justify-between p-0">
+            <div class="flex items-center gap-2">
+              <span class="badge bg-white/90 text-xs px-2 py-1 rounded shadow">Taxa anual: {{ calcularTaxaEfetivaAnual(produto.taxaEfetivaMensal) | number:'1.2-2' }}%</span>
+              @if (produto.sistema) {
+                <span class="badge-system text-xs px-2 py-1 rounded">{{ produto.sistema }}</span>
+              }
+            </div>
+            <div class="flex items-center gap-2">
+              <button mat-flat-button color="primary" class="px-3 py-1 text-sm app-btn" (click)="$event.stopPropagation(); simularComProduto(produto.id!)">Simular</button>
+              <button mat-stroked-button class="px-3 py-1 text-sm btn-laranja70 app-btn" (click)="$event.stopPropagation(); router.navigate(['/novo-produto'], { queryParams: { edit: produto.id } })">Editar</button>
+            </div>
+          </mat-card-actions>
         </mat-card>
       }
     </div>

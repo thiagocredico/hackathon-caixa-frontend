@@ -1,3 +1,35 @@
 .btn-laranja70 {
 	background-color: #f9b000 !important; 
 }
+
+/* Improve spacing for input icons on the simulation form */
+:host ::ng-deep .mat-form-field .mat-icon.mat-prefix,
+:host ::ng-deep mat-icon[matprefix] {
+	margin-right: 16px !important;
+	margin-left: 16px !important;
+	width: 20px !important;
+	height: 20px !important;
+	min-width: 20px !important;
+	padding: 0 !important;
+	background: transparent !important;
+	box-shadow: none !important;
+	border-radius: 0 !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+}
+
+:host ::ng-deep .mat-form-field .mat-icon.mat-suffix,
+:host ::ng-deep mat-icon[matsuffix] {
+	margin-left: 16px !important;
+	width: 20px !important;
+	height: 20px !important;
+	min-width: 20px !important;
+	padding: 0 !important;
+	background: transparent !important;
+	box-shadow: none !important;
+	border-radius: 0 !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+}

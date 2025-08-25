@@ -8,6 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AppDrawerContentComponent } from './components/app-drawer-content/app-drawer-content.component';
+import { AppHeaderComponent } from './components/app-header/app-header.component';
 
 
 @Component({
@@ -23,6 +24,7 @@ import { AppDrawerContentComponent } from './components/app-drawer-content/app-d
         MatIconModule,
   MatButtonModule,
   AppDrawerContentComponent,
+  AppHeaderComponent,
         RouterOutlet,
     ]
 })
