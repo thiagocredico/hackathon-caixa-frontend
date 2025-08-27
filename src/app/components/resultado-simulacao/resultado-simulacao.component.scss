@@ -35,7 +35,7 @@
 	background: transparent !important;
 	box-shadow: none !important;
 	padding: 0 !important;
-	margin-right: 8px !important; /* keep a small gap */
+	margin-right: 8px !important; 
 	width: 20px !important;
 	height: 20px !important;
 	display: inline-flex !important;
@@ -61,5 +61,9 @@
 
 	background-color: rgba(249,250,255,0.7);
 
+}
+
+:host ::ng-deep .chevron-amber.mat-icon svg {
+	fill: currentColor !important;
 }
 }

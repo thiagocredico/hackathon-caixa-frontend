@@ -47,7 +47,6 @@ describe('ListaProdutoComponent', () => {
 
 	it('deve exibir erro ao falhar no carregamento', () => {
 		productServiceSpy.fetchProducts.and.returnValue(throwError(() => new Error('Erro')));
-		// Precisa criar novo fixture para disparar o construtor novamente
 		fixture = TestBed.createComponent(ListaProdutoComponent);
 		component = fixture.componentInstance;
 		expect(component.errorMsg).toBe('Erro ao carregar produtos.');
@@ -59,7 +58,6 @@ describe('ListaProdutoComponent', () => {
 		expect(routerSpy.navigate).toHaveBeenCalledWith(['/simulacao'], { queryParams: { produtoId: 2 } });
 	});
 	it('deve calcular a taxa efetiva anual corretamente', () => {
-		// Exemplo: taxa mensal de 2% deve resultar em aproximadamente 26.82% ao ano
 		const taxaMensal = 2;
 		const resultado = component.calcularTaxaEfetivaAnual(taxaMensal);
 		expect(resultado).toBeCloseTo(26.82, 1);

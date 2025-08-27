@@ -55,7 +55,6 @@ export class FormularioProdutoComponent {
 				return;
 			}
 			this.loading.set(true);
-			// Converter taxa anual para mensal equivalente
 			const taxaEfetivaMensal = (Math.pow(1 + this.taxaEfetivaAnual() / 100, 1 / 12) - 1) * 100;
 			const product: Product = {
 				nome: this.nome(),
