@@ -1,8 +1,10 @@
 
 import { TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 import { provideRouter } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
+import { NavigationEnd } from '@angular/router';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -56,5 +58,30 @@ describe('AppComponent', () => {
     spyOn(app.router, 'navigate');
     expect(() => app.onLogoClick(undefined)).not.toThrow();
     expect(app.router.navigate).toHaveBeenCalledWith(['']);
+  });
+
+  it('should set activeUrl when router emits NavigationEnd', () => {
+    const routerMock: any = { events: of(new NavigationEnd(1, '/foo', '/foo')), navigate: jasmine.createSpy('navigate') };
+    const app = new AppComponent(routerMock as any);
+    expect(app.activeUrl).toBe('/foo');
+  });
+
+  it('isActive returns true when urls match and false otherwise', () => {
+    const routerMock: any = { events: of(new NavigationEnd(1, '/bar', '/bar')), navigate: jasmine.createSpy('navigate') };
+    const app = new AppComponent(routerMock as any);
+    const page = { title: 'X', url: '/bar', icon: 'i' };
+    expect(app.isActive(page)).toBeTrue();
+    const other = { title: 'Y', url: '/other', icon: 'i' };
+    expect(app.isActive(other)).toBeFalse();
+  });
+
+  it('toggle and close call drawer methods when drawer is present', () => {
+    const routerMock: any = { events: of(new NavigationEnd(1, '/', '/')), navigate: jasmine.createSpy('navigate') };
+    const app = new AppComponent(routerMock as any);
+    app.drawer = { toggle: jasmine.createSpy('toggle'), close: jasmine.createSpy('close') } as any;
+    app.toggle();
+    expect((app.drawer as any).toggle).toHaveBeenCalled();
+    app.close();
+    expect((app.drawer as any).close).toHaveBeenCalled();
   });
 });

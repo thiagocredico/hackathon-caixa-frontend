@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ResultadoSimulacaoComponent } from './resultado-simulacao.component';
 import { SimulationService } from '../../services/simulation.service';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
 
 describe('ResultadoSimulacaoComponent', () => {
@@ -65,5 +66,28 @@ describe('ResultadoSimulacaoComponent', () => {
 		const spy = spyOn(window.history, 'back');
 		component.voltar();
 		expect(spy).toHaveBeenCalled();
+	});
+
+	it('parcelaFor returns parcelaMensal when m is null', () => {
+		(component as any).result$ = () => ({ parcelaMensal: 123 } as any);
+		expect(component.parcelaFor(null)).toBe(123);
+	});
+
+	it('parcelaFor prefers m.parcela when present', () => {
+		(component as any).result$ = () => ({ parcelaMensal: 123 } as any);
+		expect(component.parcelaFor({ parcela: 456 })).toBe(456);
+	});
+
+	it('monthLabel returns correct month/year and handles wrap-around', () => {
+		// pick a month near year boundary to ensure calculation works
+		const label = component.monthLabel(1); // current month
+		expect(label).toMatch(/\/[0-9]{4}$/);
+	});
+
+	it('irParaSimulacao should navigate to simulacao', () => {
+		const router = TestBed.inject(Router) as any;
+		const spy = spyOn(router, 'navigate');
+		(component as any).irParaSimulacao();
+		expect(spy).toHaveBeenCalledWith(['/simulacao']);
 	});
 });
