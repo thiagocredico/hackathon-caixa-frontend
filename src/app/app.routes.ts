@@ -1,16 +1,25 @@
 import { Routes } from '@angular/router';
-import { FormularioProdutoComponent } from './components/formulario-produto/formulario-produto.component';
-import { ListaProdutoComponent } from './components/lista-produto/lista-produto.component';
-
-import { SimulacaoEmprestimoComponent } from './components/simulacao-emprestimo/simulacao-emprestimo.component';
-import { ResultadoSimulacaoComponent } from './components/resultado-simulacao/resultado-simulacao.component';
-import { SplashComponent } from './components/splash/splash.component';
 
 export const routes: Routes = [
-  { path: 'produtos', component: ListaProdutoComponent },
-  { path: 'novo-produto', component: FormularioProdutoComponent },
-  { path: 'simulacao', component: SimulacaoEmprestimoComponent },
-  { path: 'resultado', component: ResultadoSimulacaoComponent },
-  { path: '', component: SplashComponent },
+  {
+    path: 'produtos',
+    loadComponent: () => import('./components/lista-produto/lista-produto.component').then(m => m.ListaProdutoComponent),
+  },
+  {
+    path: 'novo-produto',
+    loadComponent: () => import('./components/formulario-produto/formulario-produto.component').then(m => m.FormularioProdutoComponent),
+  },
+  {
+    path: 'simulacao',
+    loadComponent: () => import('./components/simulacao-emprestimo/simulacao-emprestimo.component').then(m => m.SimulacaoEmprestimoComponent),
+  },
+  {
+    path: 'resultado',
+    loadComponent: () => import('./components/resultado-simulacao/resultado-simulacao.component').then(m => m.ResultadoSimulacaoComponent),
+  },
+  {
+    path: '',
+    loadComponent: () => import('./components/splash/splash.component').then(m => m.SplashComponent),
+  },
   { path: '**', redirectTo: 'simulacao' },
 ];

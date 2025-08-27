@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
     selector: 'app-simulacao-emprestimo',
     templateUrl: './simulacao-emprestimo.component.html',
-    styleUrls: ['./simulacao-emprestimo.component.scss'],
+    
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
     FormsModule,

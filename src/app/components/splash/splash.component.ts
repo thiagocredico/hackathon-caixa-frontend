@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'app-splash',
     templateUrl: './splash.component.html',
-    styleUrls: ['./splash.component.scss'],
+    
     imports: [MatProgressSpinnerModule]
 })
 export class SplashComponent implements OnInit {

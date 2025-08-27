@@ -50,5 +50,21 @@
 	.grid { gap: 1rem; }
 }
 
+/* Rotate chevron when expansion panel is open */
+.parcel-card ::ng-deep .mat-expansion-panel-header .mat-icon {
+	transition: transform 220ms ease;
+}
+.parcel-card ::ng-deep .mat-expansion-panel.mat-expanded .mat-expansion-panel-header .mat-icon {
+	transform: rotate(180deg);
+}
+
+/* Make header pointer and add subtle hover */
+.parcel-card ::ng-deep .mat-expansion-panel-header {
+	cursor: pointer;
+}
+.parcel-card ::ng-deep .mat-expansion-panel-header:hover {
+	background: rgba(249,250,255,0.7);
+}
+
 
 

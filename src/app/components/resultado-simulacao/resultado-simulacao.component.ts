@@ -9,10 +9,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
 @Component({
     selector: 'app-resultado-simulacao',
-    templateUrl: './resultado-simulacao.component.html',
-    styleUrls: ['./resultado-simulacao.component.scss'],
+	templateUrl: './resultado-simulacao.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         CommonModule,
@@ -20,8 +21,10 @@ import { MatIconModule } from '@angular/material/icon';
         MatListModule,
         MatButtonModule,
         MatProgressSpinnerModule,
-        MatTableModule,
-        MatIconModule,
+	MatTableModule,
+	MatIconModule,
+	MatExpansionModule,
+	MatDividerModule,
     ]
 })
 export class ResultadoSimulacaoComponent {
@@ -35,6 +38,18 @@ export class ResultadoSimulacaoComponent {
 	successMsg: string | null = null;
 
 	constructor(private simulationService: SimulationService, private router: Router) {}
+
+	monthLabel(mes: number): string {
+		const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+		const now = new Date();
+		const dt = new Date(now.getFullYear(), now.getMonth() + (mes - 1));
+		return `${months[dt.getMonth()]}/${dt.getFullYear()}`;
+	}
+
+	parcelaFor(m: any): number {
+		if (!m) return this.resultado?.parcelaMensal ?? 0;
+		return (m.parcela !== undefined && m.parcela !== null) ? m.parcela : (this.resultado?.parcelaMensal ?? 0);
+	}
 
 	salvarResultado(): void {
 		this.errorMsg = null;

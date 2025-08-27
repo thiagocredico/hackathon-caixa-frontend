@@ -7,25 +7,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { AppDrawerContentComponent } from './components/app-drawer-content/app-drawer-content.component';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
 
 
 @Component({
     selector: 'app-root',
-    templateUrl: 'app.component.html',
-    styleUrls: ['app.component.scss'],
+  templateUrl: 'app.component.html',
     imports: [
         
         CommonModule,
-        MatSidenavModule,
-        MatToolbarModule,
-        MatListModule,
-        MatIconModule,
-  MatButtonModule,
-  AppDrawerContentComponent,
-  AppHeaderComponent,
-        RouterOutlet,
+      AppHeaderComponent,
+      RouterOutlet,
     ]
 })
 export class AppComponent {

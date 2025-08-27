@@ -1,36 +1,37 @@
-
-
-
 <mat-card class="mat-elevation-z4 max-w-full sm:max-w-5xl mx-auto mt-4 p-2 sm:p-6 bg-gradient-to-br from-blue-50 to-white shadow-lg rounded-xl">
   <mat-card-content class="w-full flex flex-col items-center">
-    @if (loading) {
+    <ng-container *ngIf="loading">
       <div class="flex flex-col items-center justify-center my-4 sm:my-6 w-full">
         <mat-progress-spinner diameter="32" mode="indeterminate" color="primary"></mat-progress-spinner>
         <span class="mt-2 text-blue-700 font-medium text-sm sm:text-base">Carregando...</span>
       </div>
-    }
-    @if (errorMsg) {
+    </ng-container>
+
+    <ng-container *ngIf="errorMsg">
       <div class="text-center mb-2 sm:mb-4 w-full text-red-600 text-sm sm:text-base font-semibold flex items-center justify-center">
         <mat-icon color="warn" class="mr-2 text-sm sm:text-base">error</mat-icon>
         <span class="text-sm sm:text-base">{{ errorMsg }}</span>
       </div>
-    }
-    @if (!loading && !errorMsg && resultado) {
+    </ng-container>
+
+    <ng-container *ngIf="!loading && !errorMsg && resultado">
       <div class="w-full">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+
           <!-- Summary card -->
-          <mat-card class="result-card p-4">
-            <div class="flex items-center justify-between mb-3">
-              <div class="flex items-center gap-3">
+          <mat-card class="bg-gradient-to-br from-white/95 to-blue-50 rounded-lg shadow p-4">
+            <div class="flex flex-col my-4 gap-2 justify-between mb-3">
+              <div class="flex gap-3 items-center">
                 <div class="rounded-full bg-transparent p-3 shadow-sm">
-                  <mat-icon class="icon-sky text-2xl">insights</mat-icon>
+                  <mat-icon class="text-amber-500 text-2xl">insights</mat-icon>
                 </div>
                 <div>
                   <div class="text-lg font-semibold text-blue-800">Resumo da Simulação</div>
                   <div class="text-xs text-gray-500">Visão rápida dos principais indicadores</div>
                 </div>
               </div>
-              <div class="text-sm text-gray-500">Produto: <span class="font-semibold text-blue-700">{{ resultado.produto.nome }}</span></div>
+
+              <div class="p-4 text-sm text-gray-500">Produto: <span class="font-semibold text-blue-700">{{ resultado.produto.nome }}</span></div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -57,55 +58,72 @@
             </div>
           </mat-card>
 
-          <!-- Parcels / schedule card -->
-          <mat-card class="parcel-card p-2">
-            <div class="flex items-center justify-between p-3 border-b border-gray-100">
+          <!-- Parcels / accordion schedule -->
+          <mat-card class="p-4 bg-white shadow-md rounded-lg">
+            <div class="flex items-start justify-between gap-4 mb-4">
               <div class="flex items-center gap-3">
-                <mat-icon class="icon-sky">receipt_long</mat-icon>
+                <mat-icon class="text-sky-600">receipt_long</mat-icon>
                 <div>
-                  <div class="text-base font-semibold text-blue-800">Detalhes das Parcelas</div>
-                  <div class="text-xs text-gray-500">Tabela de amortização</div>
+                    <div class="text-lg font-semibold text-sky-800">Detalhes das Parcelas</div>
+                    <div class="text-sm text-gray-500">Clique na linha para ver detalhes</div>
                 </div>
               </div>
-              <div class="text-xs text-gray-500">Total de {{ resultado.memoriaCalculo.length }} meses</div>
             </div>
 
-            @if (resultado.memoriaCalculo.length) {
-              <div class="table-container mt-3 overflow-auto">
-                <mat-table [dataSource]="resultado.memoriaCalculo" class="mat-elevation-z0 min-w-[320px] w-full">
-                  <ng-container matColumnDef="mes">
-                    <mat-header-cell *matHeaderCellDef class="text-center px-2 py-1">Mês</mat-header-cell>
-                    <mat-cell *matCellDef="let m" class="text-center px-2 py-1">{{ m.mes }}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="parcela">
-                    <mat-header-cell *matHeaderCellDef class="text-center px-2 py-1">Parcela</mat-header-cell>
-                    <mat-cell *matCellDef="let m" class="text-center px-2 py-1">{{ m.parcela !== undefined ? (m.parcela | currency:'BRL') : (resultado.parcelaMensal | currency:'BRL') }}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="juros">
-                    <mat-header-cell *matHeaderCellDef class="text-center px-2 py-1">Juros</mat-header-cell>
-                    <mat-cell *matCellDef="let m" class="text-center px-2 py-1">{{ m.juros | currency:'BRL' }}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="amortizacao">
-                    <mat-header-cell *matHeaderCellDef class="text-center px-2 py-1">Amortização</mat-header-cell>
-                    <mat-cell *matCellDef="let m" class="text-center px-2 py-1">{{ m.amortizacao | currency:'BRL' }}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="saldo">
-                    <mat-header-cell *matHeaderCellDef class="text-center px-2 py-1">Saldo</mat-header-cell>
-                    <mat-cell *matCellDef="let m" class="text-center px-2 py-1">{{ m.saldo | currency:'BRL' }}</mat-cell>
-                  </ng-container>
+            <div class="mt-2">
+              <ng-container *ngIf="resultado.memoriaCalculo?.length">
+                <mat-accordion>
+                  <mat-expansion-panel *ngFor="let m of resultado.memoriaCalculo; let i = index">
+                    <mat-expansion-panel-header>
+                      <div class="flex items-center justify-between w-full">
+                        <div class="flex items-center gap-3">
+                          <div class="w-6 h-6 bg-white border border-sky-100 rounded-full flex items-center justify-center text-sm text-sky-700">{{ m.mes }}</div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                          <div class="text-sm font-semibold text-sky-800">{{ parcelaFor(m) | currency:'BRL' }}</div>
+                          <!-- Decorative chevron that rotates when panel is expanded -->
+                          <mat-icon aria-hidden="true">expand_more</mat-icon>
+                          <span class="sr-only">Alternar detalhes da parcela do mês {{ m.mes }}</span>
+                        </div>
+                      </div>
+                    </mat-expansion-panel-header>
 
-                  <mat-header-row *matHeaderRowDef="['mes', 'parcela', 'juros', 'amortizacao', 'saldo']" class="text-xs sm:text-sm"></mat-header-row>
-                  <mat-row *matRowDef="let row; columns: ['mes', 'parcela', 'juros', 'amortizacao', 'saldo'];" class="text-xs sm:text-sm"></mat-row>
-                </mat-table>
-              </div>
-            }
+                    <div class="p-4 bg-gray-50 rounded-b-md">
+                      <div class="mb-2">
+                        <div class="text-xs text-gray-500">Mês</div>
+                        <div class="text-sm font-medium text-gray-800">{{ monthLabel(m.mes) }}</div>
+                      </div>
+                      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+                        <div>
+                          <div class="text-xs text-gray-500">Juros</div>
+                          <div class="text-sm font-medium text-gray-800">{{ m.juros | currency:'BRL' }}</div>
+                        </div>
+                        <div>
+                          <div class="text-xs text-gray-500">Amortização</div>
+                          <div class="text-sm font-medium text-gray-800">{{ m.amortizacao | currency:'BRL' }}</div>
+                        </div>
+                        <div>
+                          <div class="text-xs text-gray-500">Saldo</div>
+                          <div class="text-sm font-medium text-gray-800">{{ m.saldo | currency:'BRL' }}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </ng-container>
+
+              <ng-container *ngIf="!resultado.memoriaCalculo?.length">
+                <div class="py-6 text-center text-gray-500">Nenhuma parcela disponível.</div>
+              </ng-container>
+            </div>
           </mat-card>
         </div>
       </div>
-    }
+    </ng-container>
+
     <div class="text-center my-4 sm:my-6 w-full flex justify-center">
-  <button mat-raised-button color="primary" (click)="irParaSimulacao()" class="px-4 sm:px-8 py-2 text-sm sm:text-base font-semibold rounded shadow hover:bg-blue-700 transition-all app-btn nova-simulacao-btn">
-        <mat-icon class="icon-sky mr-2">autorenew</mat-icon>
+      <button mat-raised-button color="primary" (click)="irParaSimulacao()" class="px-4 sm:px-8 py-2 text-sm sm:text-base font-semibold rounded shadow hover:bg-blue-700 transition-all app-btn nova-simulacao-btn">
+        <mat-icon class="icon-sky mr-2" aria-hidden="true">autorenew</mat-icon>
         Nova Simulação
       </button>
     </div>

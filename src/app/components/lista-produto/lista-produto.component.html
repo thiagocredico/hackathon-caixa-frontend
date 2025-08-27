@@ -15,35 +15,33 @@
   @if (!loading && !errorMsg && products$().length) {
   <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2">
       @for (produto of products$(); track produto) {
-        <mat-card class="product-card p-3" role="button" tabindex="0"
+        <mat-card class="bg-white rounded-lg shadow-sm transition-transform duration-150 p-3 min-h-[140px] min-w-[240px]" role="button" tabindex="0"
           (click)="produto.id != null ? simularComProduto(produto.id) : null"
           (keydown.enter)="produto.id != null ? simularComProduto(produto.id) : null">
           <div class="flex items-start justify-between gap-3">
             <div class="flex items-start gap-3">
               <div class="w-12 h-12 rounded-lg bg-transparent flex items-center justify-center shadow-sm">
-                <mat-icon class="icon-sky text-xl">shopping_bag</mat-icon>
+                <mat-icon class="text-sky-500 text-xl">shopping_bag</mat-icon>
               </div>
               <div>
                 <div class="font-semibold text-sm sm:text-base">{{ produto.nome }}</div>
                 <div class="text-xs text-gray-500">{{ produto.sistema || '—' }}</div>
               </div>
             </div>
-            <div class="flex flex-col items-end gap-2 product-meta">
-              <div class="text-sm font-semibold text-blue-800 taxa-efetiva">{{ produto.taxaEfetivaMensal }}%</div>
-              <div class="text-xs text-gray-500 taxa-prazo">{{ produto.prazoMaximo }} meses</div>
+            <div class="flex flex-col items-end gap-2 max-w-[45%] min-w-[110px]">
+              <div class="text-sm font-semibold text-sky-800">{{ produto.taxaEfetivaMensal }}%</div>
+              <div class="text-xs text-gray-500">{{ produto.prazoMaximo }} meses</div>
             </div>
           </div>
-
-          <mat-card-actions class="card-footer mt-3 flex items-center justify-between p-0">
+          <mat-card-actions class="mt-3 p-0 flex items-center justify-between gap-2">
             <div class="flex items-center gap-2">
-              <span class="badge bg-white/90 text-xs px-2 py-1 rounded shadow">Taxa anual: {{ calcularTaxaEfetivaAnual(produto.taxaEfetivaMensal) | number:'1.2-2' }}%</span>
+              <span class="bg-white/90 text-xs px-2 py-1 rounded shadow">Taxa anual: {{ calcularTaxaEfetivaAnual(produto.taxaEfetivaMensal) | number:'1.2-2' }}%</span>
               @if (produto.sistema) {
-                <span class="badge-system text-xs px-2 py-1 rounded">{{ produto.sistema }}</span>
+                <span class="bg-sky-100 text-xs px-2 py-1 rounded font-semibold text-sky-700">{{ produto.sistema }}</span>
               }
             </div>
             <div class="flex items-center gap-2">
-              <button mat-flat-button color="primary" class="px-3 py-1 text-sm app-btn" (click)="$event.stopPropagation(); simularComProduto(produto.id!)">Simular</button>
-              <button mat-stroked-button class="px-3 py-1 text-sm btn-laranja70 app-btn" (click)="$event.stopPropagation(); router.navigate(['/novo-produto'], { queryParams: { edit: produto.id } })">Editar</button>
+              <button mat-flat-button color="primary" class="px-3 py-1 text-sm rounded-md" (click)="$event.stopPropagation(); simularComProduto(produto.id!)">Simular</button>
             </div>
           </mat-card-actions>
         </mat-card>

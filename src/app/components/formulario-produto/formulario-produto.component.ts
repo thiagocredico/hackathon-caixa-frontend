@@ -2,6 +2,7 @@ import { Component, Input, signal, ChangeDetectionStrategy } from '@angular/core
 import { ProductService, Product } from '../../services/product.service';
 import { Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -14,9 +15,10 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
     selector: 'app-formulario-produto',
     templateUrl: './formulario-produto.component.html',
-    styleUrls: ['./formulario-produto.component.scss'],
+    
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
+	CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,

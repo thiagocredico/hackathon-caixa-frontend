@@ -1,0 +1,16 @@
+@import '~@angular/material/theming';
+
+// Include core styles required for Angular Material components
+@include mat-core();
+
+// Define palettes (based on indigo-pink prebuilt theme)
+$primary: mat-palette($mat-indigo, 500);
+$accent: mat-palette($mat-pink, A200, A100, A400);
+
+// Create a light theme
+$my-theme: mat-light-theme((
+  color: (primary: $primary, accent: $accent)
+));
+
+// Include component styles for the theme
+@include angular-material-theme($my-theme);

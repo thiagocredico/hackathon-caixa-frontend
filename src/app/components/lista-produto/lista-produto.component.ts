@@ -9,8 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 @Component({
     selector: 'app-lista-produto',
-    templateUrl: './lista-produto.component.html',
-    styleUrls: ['./lista-produto.component.scss'],
+	templateUrl: './lista-produto.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         CommonModule,
