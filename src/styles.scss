@@ -1,77 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  height: 90%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
+/* Minimal global base styles; all visual component styles migrated to Tailwind utilities in templates */
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-/* Global icon color utility (use app orange) */
-.mat-icon, mat-icon {
-  color: #f59e0b !important; /* amber/orange */
-  background-color: #fff7ed; /* very light orange */
-  border-radius: 9999px;
-  box-sizing: border-box;
-  /* fixed circular container so icon is always centered */
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1; /* ensure text icons center vertically */
-  vertical-align: middle;
-  font-size: 18px; /* reasonable default for icon glyphs */
-}
-
-/* Ensure SVG icons scale and center inside the circle */
-.mat-icon svg, mat-icon svg { width: 60%; height: 60%; display: block; }
-
-/* Utility class for targeted icons (kept name for compatibility) */
-.icon-sky {
+/* Make all Material icons orange by default */
+mat-icon, .mat-icon {
   color: #f59e0b !important;
-  background-color: #fff7ed !important;
-  border-radius: 9999px !important;
-  box-sizing: border-box !important;
-  width: 36px !important;
-  height: 36px !important;
-  padding: 0 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  line-height: 1 !important;
-  vertical-align: middle !important;
-  font-size: 18px !important;
 }
 
-/* Stronger overrides to ensure perfect centering across variants */
-.mat-icon, mat-icon, .icon-sky {
-  margin: 0 !important;
-  transform: none !important;
-  /* force glyph centering for font-based icons */
-  text-align: center !important;
+/* Ensure svg-based icons inherit the color */
+mat-icon svg, .mat-icon svg {
+  fill: currentColor !important;
+  color: inherit !important;
 }
 
-.mat-icon svg, mat-icon svg {
-  margin: 0 auto !important;
-  display: block !important;
-}
-
-/* Opt-out utility: prevents circle background when needed */
-.no-icon-bg { background: transparent !important; box-shadow: none !important; }
-
-/* Small utility and sibling selector to add consistent gap between icon and adjacent text */
-.icon-gap { margin-right: 8px !important; }
-.mat-icon + *, mat-icon + * { margin-left: 8px !important; }
+/* Add padding 1rem (Tailwind p-4) to all icons */
+/* No global padding for icons; use Tailwind utilities in templates when needed */
 
 /* Input icons (mat-form-field prefix/suffix) — smaller, transparent, perfectly centered */
 .mat-form-field .mat-icon.mat-prefix,

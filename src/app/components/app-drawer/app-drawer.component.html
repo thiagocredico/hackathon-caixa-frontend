@@ -10,7 +10,7 @@
         [routerLink]="[p.url]"
         routerLinkActive="selected"
         [attr.aria-label]="'Ir para ' + p.title"
-        [ngClass]="{ 'menu-item-selected': p.url === '/' + (router.url || '').split('/')[1] }"
+  [ngClass]="{ 'bg-sky-50 text-sky-700 rounded-lg': p.url === '/' + (router.url || '').split('/')[1] }"
         (click)="sidenav.close()"
         >
         <mat-icon matListIcon class="text-base sm:text-lg">{{ p.icon }}</mat-icon>

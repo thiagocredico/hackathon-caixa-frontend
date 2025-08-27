@@ -25,15 +25,12 @@
 .result-card, .parcel-card { opacity: 0; transform: translateY(8px); animation: entryFade 320ms forwards ease; }
 @keyframes entryFade { to { opacity: 1; transform: translateY(0); } }
 
-.icon-sky { color: #f59e0b !important; font-size: 1.15rem; }
 
 .result-card mat-icon, .result-card .mat-icon, .parcel-card mat-icon, .parcel-card .mat-icon {
 	color: #f59e0b !important;
 }
 
-.btn-laranja70 { background-color: #f9b000 !important; padding: 10px 16px; }
 
-/* Button-specific rule: remove circular background for the icon inside the Nova Simulação button */
 :host ::ng-deep .nova-simulacao-btn mat-icon, :host ::ng-deep .nova-simulacao-btn .mat-icon {
 	background: transparent !important;
 	box-shadow: none !important;
@@ -50,7 +47,6 @@
 	.grid { gap: 1rem; }
 }
 
-/* Rotate chevron when expansion panel is open */
 .parcel-card ::ng-deep .mat-expansion-panel-header .mat-icon {
 	transition: transform 220ms ease;
 }
@@ -58,13 +54,12 @@
 	transform: rotate(180deg);
 }
 
-/* Make header pointer and add subtle hover */
+
 .parcel-card ::ng-deep .mat-expansion-panel-header {
-	cursor: pointer;
-}
+
 .parcel-card ::ng-deep .mat-expansion-panel-header:hover {
-	background: rgba(249,250,255,0.7);
+
+	background-color: rgba(249,250,255,0.7);
+
 }
-
-
-
+}

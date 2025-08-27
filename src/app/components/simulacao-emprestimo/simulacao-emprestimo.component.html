@@ -10,7 +10,7 @@
     <form (ngSubmit)="simulate()" class="py-2 sm:py-4 flex flex-col items-center w-full" novalidate>
       <mat-form-field appearance="fill" class="w-full mb-2 sm:mb-4 mx-auto">
         <mat-label>Produto</mat-label>
-  <mat-icon matPrefix class="text-sky-500">shopping_bag</mat-icon>
+  <mat-icon matPrefix class="mx-4">shopping_bag</mat-icon>
         <mat-select
           [ngModel]="produtoId()"
           (ngModelChange)="produtoId.set($any($event))"
@@ -29,7 +29,7 @@
 
       <mat-form-field appearance="fill" class="w-full mb-2 sm:mb-4 mx-auto">
         <mat-label>Valor do Empréstimo</mat-label>
-  <mat-icon matPrefix class="text-sky-500">attach_money</mat-icon>
+  <mat-icon matPrefix class="mx-4">attach_money</mat-icon>
         <input
           matInput
           type="number"
@@ -44,7 +44,7 @@
 
       <mat-form-field appearance="fill" class="w-full mb-2 sm:mb-4 mx-auto">
         <mat-label>Número de Meses</mat-label>
-  <mat-icon matPrefix class="text-sky-500">calendar_month</mat-icon>
+  <mat-icon matPrefix class="mx-4">calendar_month</mat-icon>
         <input
           matInput
           type="number"
@@ -77,14 +77,7 @@
           }
         </button>
 
-        <button
-          mat-raised-button
-          type="button"
-          class="w-full sm:w-auto px-4 sm:px-8 py-2 text-sm sm:text-base font-semibold rounded shadow bg-amber-500 text-amber-900 hover:bg-orange-500 transition-all"
-          (click)="irParaCadastroProduto()"
-          >
-          Cadastrar novo produto
-        </button>
+
       </div>
     </form>
   </mat-card-content>
